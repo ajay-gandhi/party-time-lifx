@@ -1,0 +1,30 @@
+{
+  "name": "party-time-lifx",
+  "version": "0.0.1",
+  "description": "Tell LIFX bulbs to flash colors",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajay-gandhi/party-time-lifx.git"
+  },
+  "keywords": [
+    "lifx",
+    "light",
+    "smart",
+    "api",
+    "party",
+    "time"
+  ],
+  "author": "Ajay Gandhi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajay-gandhi/party-time-lifx/issues"
+  },
+  "homepage": "https://github.com/ajay-gandhi/party-time-lifx#readme",
+  "dependencies": {
+    "node-lifx": "^0.8.0"
+  }
+}
