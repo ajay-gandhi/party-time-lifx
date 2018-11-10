@@ -16,22 +16,36 @@ module.exports = (function () {
       }
     });
 
+    this.going = false;
+    this.prevColor = -1;
     this.brightness = brightness || DEFAULT_BRIGHTNESS;
   }
 
   PartyTime.prototype.start = function () {
-    let prev = -1;
+    this.going = true;
     this.light.on();
-    setInterval(() => {
-      let selection = Math.floor(Math.random() * COLORS.length);
-      while (selection === prev) selection = Math.floor(Math.random() * COLORS.length);
-      prev = selection;
-      this.light.color(COLORS[selection], SATURATION, this.brightness);
-    }, DURATION);
+    this.interval = setInterval(this.nextColor.bind(this), DURATION);
   }
 
   PartyTime.prototype.stop = function () {
-    this.light.off();
+    this.going = false;
+  }
+
+  PartyTime.prototype.nextColor = function () {
+    if (this.going) {
+      // Check if should stop
+      this.light.getPower((err, power) => {
+        if (power !== 1) this.going = false;
+      });
+
+      let selection = Math.floor(Math.random() * COLORS.length);
+      while (selection === this.prevColor) selection = Math.floor(Math.random() * COLORS.length);
+      this.prevColor = selection;
+      this.light.color(COLORS[selection], SATURATION, this.brightness);
+    } else {
+      clearInterval(this.interval);
+      this.light.off();
+    }
   }
 
   return PartyTime;
