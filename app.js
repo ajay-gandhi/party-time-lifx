@@ -34,4 +34,6 @@ module.exports = (function () {
     this.light.off();
   }
 
+  return PartyTime;
+
 })();
